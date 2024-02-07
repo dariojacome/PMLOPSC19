@@ -86,3 +86,20 @@ def UserForGenre( genero : str ):
         "Usuario con más horas jugadas del genero": usuario_mas_horas,
         "Horas jugadas": sumas_por_anio.to_dict()       
     } 
+    
+    
+@app.get('/best_developer_year/') 
+def best_developer_year( año : int ):
+    
+    df_b_dev=pd.read_csv('4punto.csv')
+
+    
+    df_filt = df_b_dev.loc[(df_b_dev['year'] == año)]
+    
+    df_agrupado = df_filt.groupby('developer').size().reset_index(name='repeticiones')
+    
+    df_top3 = df_agrupado.sort_values('repeticiones', ascending=False).head(3)
+    
+    resultado = [{"Puesto " + str(i + 1): row['developer']} for i, (_, row) in enumerate(df_top3.iterrows(), start=0)]
+    
+    return resultado
