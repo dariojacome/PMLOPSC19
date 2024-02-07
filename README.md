@@ -29,12 +29,11 @@ Una vez completado este proceso, se importaron los datos en el cuaderno [apis.ip
 
 Se crea una API para realizar consultas sobre los datos:
 
-- Consulta de dinero gastado por el usuario, el porcentaje de recomendación en base a reviews.recommend y cantidad de items. ``def userdata( User_id : str )`` 
-- Consulta  de cantidad de usuarios que realizaron reviews entre las fechas dadas y, el porcentaje de recomendación de los mismos en base a reviews.recommend ``def countreviews( YYYY-MM-DD y YYYY-MM-DD : str )`` 
-- Consulta el puesto en el que se encuentra un género sobre el ranking de los mismos analizado bajo la columna PlayTimeForever.. ``def genre( género : str )`` 
-- Consulta de los top 5 juegos de usuarios con más horas de juego en el género dado, con su URL (del user) y user_id.``def userforgenre( género : str )``  
-- Cantidad de items y porcentaje de contenido Free por año según empresa desarrolladora.  ``def developer( desarrollador : str )``  
-- Consulta  el año y devuelve una lista con la cantidad de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento.  ``def sentiment_analysis( año : int )``  
+
+**`Transformaciones`**:  Para este MVP no se te pide transformaciones de datos(` aunque encuentres una motivo para hacerlo `) pero trabajaremos en leer el dataset con el formato correcto. Puedes eliminar las columnas que no necesitan para responder las consultas o preparar los modelos de aprendizaje automático, y de esa manera optimizar el rendimiento de la API y el entrenamiento del modelo.
+
+**`Feature Engineering`**:  En el dataset *user_reviews* se incluyen reseñas de juegos hechos por distintos usuarios. Debes crear la columna ***'sentiment_analysis'*** aplicando análisis de sentimiento con NLP con la siguiente escala: debe tomar el valor '0' si es malo, '1' si es neutral y '2' si es positivo. Esta nueva columna debe reemplazar la de user_reviews.review para facilitar el trabajo de los modelos de machine learning y el análisis de datos. De no ser posible este análisis por estar ausente la reseña escrita, debe tomar el valor de `1`.
+
 
 
 ## **Fuente de datos**
