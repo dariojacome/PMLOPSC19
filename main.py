@@ -61,3 +61,28 @@ def userdata(user_id: str) -> dict:
         }
     else:
         return 
+    
+@app.get('/userforgenre/') 
+def UserForGenre( genero : str ):
+    
+    genero = genero.capitalize()
+    #importamos el 3 punto 
+    df_genre=pd.read_parquet('3punto.parquet')
+
+    # Encontrar el usuario con más horas jugadas para el género dado
+    usuario_mas_horas = df_genre.groupby('user_id')[genero].sum().idxmax()
+    
+
+    # Filtrar el DataFrame para el usuario con más horas jugadas
+    df_usuario_mas_horas = df_genre[df_genre['user_id'] == usuario_mas_horas]
+    
+    # Agrupar por año y sumar las horas jugadas
+    sumas_por_anio = df_usuario_mas_horas.groupby('release_year')[genero].sum()
+
+    
+
+
+    return {
+        "Usuario con más horas jugadas del genero": usuario_mas_horas,
+        "Horas jugadas": sumas_por_anio.to_dict()       
+    } 
